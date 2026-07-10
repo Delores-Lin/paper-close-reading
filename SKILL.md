@@ -16,8 +16,9 @@ Use this skill to read papers with source-grounded interpretation and reusable r
 3. Re-read the relevant source before answering. For PDFs, extract or reopen the target pages; do not rely only on memory from earlier turns.
 4. Locate evidence precisely: section title, page number, table/figure number, appendix subsection, or paragraph context.
 5. Explain in source-adjacent blocks: show a short original fragment, then immediately explain that fragment in Chinese before moving to the next fragment.
-6. Separate what the paper explicitly says from what can be inferred; label critiques and task transfers as your interpretation.
-7. End with what to read next and why.
+6. When the text cites a figure, table, equation, or appendix as evidence, pause at that point, retrieve that artifact, and explain it in the context of the sentence or claim that invoked it. If one sentence or paragraph cites multiple artifacts, locate and address every cited artifact before continuing; do not cover only the most convenient one. Do not move all figure/table reading into a detached section unless the user explicitly asks for a standalone figure/table review.
+7. Separate what the paper explicitly says from what can be inferred; label critiques and task transfers as your interpretation.
+8. End with what to read next and why.
 
 ## Reading Depth
 
@@ -51,8 +52,8 @@ For section-level close reading, use this structure:
 - **外部元信息**: report venue/status, citation count if reliably available, official/arXiv page, version date, code/data links when visible, and lookup date/source.
 - **位置**: name the section and page, plus table/figure/appendix if relevant.
 - Then read in repeated blocks:
-  - `原文`: quote one short phrase or sentence fragment from the relevant location.
-  - `解释`: explain that exact fragment in Chinese, including terms, method, claim, implication, and whether it is explicit or inferred.
+  - `原文（Section/Page/Figure/Table）`: quote the complete sentence whenever feasible, with the exact location in the label. If the sentence is too long or contains unrelated clauses, quote the shortest complete clause or sentence that preserves the claim.
+  - `解释`: explain that exact sentence or clause in Chinese, including terms, method, claim, implication, and whether it is explicit or inferred.
 - **为什么重要**: connect the section to the paper's argument, method, experiment, or evaluation design.
 - **批判性阅读**: identify assumptions, metric caveats, baseline issues, limitations, missing controls, or overclaiming.
 - **迁移到用户课题**: state how the idea can or cannot transfer to the user's concrete research question.
@@ -97,14 +98,17 @@ Prefer a compact table:
 
 ## Figure And Table Reading
 
+Read figures and tables as part of the paper's argument, not as isolated illustrations. When a paragraph says "as shown in Figure X" or a contribution cites a table, first explain the paragraph's claim, then inspect the figure/table to test how that evidence supports the claim. If the paragraph cites multiple figures/tables/appendices, handle them in citation order and state which part of the claim each one supports.
+
 For important figures or tables, explain:
 
 1. Figure/table number and page.
-2. What the rows, columns, axes, colors, or curves represent.
-3. What comparison is being made.
-4. Which metric changes, by how much when visible, and whether the pattern is stable.
-5. What conclusion the authors draw.
-6. Whether the figure/table actually supports that conclusion.
+2. The exact sentence, claim, or contribution in the surrounding text that invokes it.
+3. What the rows, columns, axes, colors, or curves represent.
+4. What comparison is being made.
+5. Which metric changes, by how much when visible, and whether the pattern is stable.
+6. What conclusion the authors draw.
+7. Whether the figure/table actually supports that conclusion, and what caveat remains.
 
 Do not say only "performance improves"; specify dataset, metric, baseline, direction, and caveat.
 
@@ -154,7 +158,7 @@ For a group of papers, organize reading order by dependency rather than chronolo
 - Never present remembered detail as newly verified. If wording, page, or figure location matters, re-open or re-extract the source.
 - When the user asks "where is this in the paper?" or challenges a claim, verify against the source and state whether it is explicit, implied, or your explanation.
 - If PDF extraction is noisy, use page/section context and say when the citation is approximate.
-- Keep quotes short and relevant. Do not reproduce long paper passages.
+- Prefer quoting a complete sentence with an exact location label, while keeping quotes short and relevant. Do not reproduce long paper passages.
 - Do not separate all quotes into one section and all explanations into another; interleave quote and explanation.
 - Citation counts, venue status, version dates, and code/data availability are current external facts. Browse for them when starting a new paper or when asked; do not rely on memory.
 - If the paper is old and the user asks whether a result is still current, separate paper-era conclusions from current-day claims.
