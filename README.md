@@ -1,140 +1,51 @@
 # Paper Close Reading
 
-一个用于 **AI 论文精读** 的 Codex Skill：不只总结论文，而是回到原文、定位证据、逐段解释，并把阅读结果沉淀为可复用的研究笔记。
+Paper Close Reading is a skills-only Codex plugin for rigorous, source-grounded reading of academic papers. It supports whole-paper triage, section-by-section explanation, figure and table analysis, experiment critique, replication-oriented reading, and reusable research notes.
 
-> 适合文献调研、方法复现、实验设计、Related Work 写作，以及围绕具体研究问题的长期阅读。
+## What it does
 
-## 为什么做这个 Skill
+- Reopens the relevant paper pages before making source-specific claims.
+- Binds important statements to sections, pages, figures, tables, equations, or appendices.
+- Separates author claims, observed evidence, inference, and critique.
+- Explains short source fragments adjacent to their interpretation.
+- Produces structured method, experiment, limitation, and transfer notes.
+- Refuses to invent quotations, page numbers, metrics, citations, or metadata.
 
-普通的论文摘要很快，但经常留下几个问题：
+## Plugin contents
 
-- 结论来自论文原文，还是模型自己的补充？
-- 某个判断究竟在第几页、哪张图、哪张表？
-- 表格里的提升是否真的支持作者的主张？
-- 论文的方法、指标和实验设置能否迁移到自己的课题？
-- 读完之后，下一篇该读什么？
+```text
+.codex-plugin/plugin.json
+skills/paper-close-reading/
+  SKILL.md
+  agents/openai.yaml
+  references/
+assets/
+evals/submission-tests.json
+PRIVACY.md
+TERMS.md
+SUPPORT.md
+```
 
-`paper-close-reading` 把这些问题变成一套稳定的精读流程，让 Codex 像研究搭档一样围绕证据阅读，而不是生成一份泛泛的摘要。
+## Example prompts
 
-## 核心能力
+- “Read this paper section by section with cited source locations.”
+- “Explain Figure 3 and Table 2 and test whether they support the authors' claim.”
+- “Read this paper for replication and list every missing implementation detail.”
+- “精读这篇论文，并判断它的方法能否迁移到我的研究课题。”
 
-- **原文贴近式讲解**：引用最短必要原文，紧接着用中文解释术语、方法、含义与上下文。
-- **精确证据定位**：标注章节、页码、图、表和附录位置；需要时重新打开对应页面核验。
-- **图表联动阅读**：正文引用 Figure、Table 或 Appendix 时，立即检查相应证据，不把图表与论证拆开。
-- **方法与实验拆解**：提取任务、输入输出、数据、ground truth、baseline、metric、主要结论和支撑证据。
-- **批判性阅读**：检查假设、数据覆盖、指标有效性、基线公平性、缺失对照、泄漏风险和过度外推。
-- **研究问题迁移**：区分“论文明确声称”“可以合理推断”和“对用户课题的启发”。
-- **持续阅读导航**：给出下一节、下一张表、附录或下一篇论文的阅读建议。
-- **外部元信息核验**：开始精读新论文时，核对发表状态、版本时间、引用信息及可见的代码/数据链接；无法可靠获取时明确说明。
+## Local validation
 
-## 三种阅读深度
-
-| 模式 | 适用场景 | 重点内容 |
-|---|---|---|
-| 快速筛选 | 判断论文是否值得继续读 | 标题、摘要、引言、核心图表、结论与引用线索 |
-| 标准精读 | 大多数相关工作阅读 | 引言、方法、主实验、关键图表、局限与结论 |
-| 复现导向 | 方法或 benchmark 将影响自己的实验 | 附录、prompt、数据构建、指标、超参数、代码与评测脚本 |
-
-## 安装
-
-将仓库克隆到 Codex 的 skills 目录：
+Run the official plugin and skill validators before packaging:
 
 ```bash
-git clone https://github.com/Delores-Lin/paper-close-reading.git \
-  "${CODEX_HOME:-$HOME/.codex}/skills/paper-close-reading"
+python3 /path/to/plugin-creator/scripts/validate_plugin.py .
+python3 /path/to/skill-creator/scripts/quick_validate.py skills/paper-close-reading
 ```
 
-重启 Codex 或开启一个新任务，使 Skill 被重新发现。
+## Public submission
 
-如果已经安装，可在仓库目录中执行：
+Submit this as a **Skills only** plugin through the OpenAI Plugin Submission Portal. Use `evals/submission-tests.json` for the required five positive and three negative tests. See `SUBMISSION.md` for the remaining account-level steps.
 
-```bash
-git pull
-```
+## License
 
-## 使用方法
-
-在 Codex 中直接描述论文和阅读目标，或显式使用 `$paper-close-reading`。
-
-### 从一篇新论文开始
-
-```text
-使用 $paper-close-reading 精读这篇论文。先做 5C 快速筛选，
-再告诉我它和“模型不确定性评估”这个研究问题是否相关。
-```
-
-### 按章节继续读
-
-```text
-继续精读 Method。逐段引用并解释；正文提到的图、表和附录要同步展开，
-每个结论都标出来源位置。
-```
-
-### 拆实验与表格
-
-```text
-用复现导向模式精读实验部分。先整理 task、data、ground truth、
-baseline 和 metric，再检查 Table 2 是否真的支持作者的主张。
-```
-
-### 服务自己的研究课题
-
-```text
-读完后把论文迁移到我的课题：哪些设计可以直接复用，哪些假设不成立，
-还缺什么对照实验？最后给我一条可写进 Related Work 的表述。
-```
-
-## 典型输出
-
-Skill 会根据任务动态调整结构。一份完整的研究笔记通常包含：
-
-1. 一句话定位与 5C 筛选
-2. 外部元信息及核验来源
-3. 原文、位置与逐段解释
-4. 核心术语表
-5. 方法和实验拆解
-6. 关键图表及其支撑的论点
-7. 局限、反例与证据强度
-8. 对当前课题的启发
-9. 可写入 Related Work 的句子
-10. 可复用的实验设计与下一步阅读建议
-
-示例拆解表：
-
-| Item | Content |
-|---|---|
-| Task | 论文实际测量或优化的问题 |
-| Input / Output | 模型接收什么、产生什么 |
-| Ground truth | 谁或什么决定正确性 |
-| Metric | 指标如何定义、能与不能测量什么 |
-| Baseline / Control | 哪些比较让结论成立 |
-| Main claim | 作者明确提出的主要结论 |
-| Evidence | 对应章节、图、表或附录 |
-
-## 阅读原则
-
-- 不把记忆中的细节冒充为刚核验的事实。
-- 不用“效果很好”代替数据、基线、指标与适用范围。
-- 不把论文原话、合理推断和批判性意见混在一起。
-- 不把全部引用和全部解释拆成互不对应的两个区域。
-- 不因为 PDF 提取困难就省略来源；定位只能近似时会明确说明。
-- 不猜测无法可靠获得的引用量、版本状态或代码可用性。
-
-## 项目结构
-
-```text
-paper-close-reading/
-├── SKILL.md             # 精读流程、证据规则与输出规范
-├── agents/
-│   └── openai.yaml      # Codex 中的显示信息与默认提示词
-└── README.md            # 面向使用者的项目说明
-```
-
-## 适合谁
-
-- 正在做文献调研、开题或写 Related Work 的研究者
-- 想理解方法细节，而不是只看摘要的学生
-- 需要复现论文或设计对照实验的工程师
-- 希望建立可追溯、可复用研究笔记的人
-
-如果这个 Skill 对你的论文阅读有帮助，欢迎 Star，并提交 Issue 分享你最希望补充的阅读场景。
+MIT. See `LICENSE`.

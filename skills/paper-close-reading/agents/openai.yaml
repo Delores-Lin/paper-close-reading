@@ -1,4 +1,4 @@
 interface:
   display_name: "Paper Close Reading"
-  short_description: "Read papers with cited source locations"
+  short_description: "Read papers with traceable source locations"
   default_prompt: "Use $paper-close-reading to guide me through this paper section by section with cited locations."
