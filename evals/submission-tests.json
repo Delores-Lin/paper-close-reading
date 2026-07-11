@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "positive_tests": [
+    {
+      "id": "positive-full-paper",
+      "prompt": "Read the attached research paper closely. Give me a 5C triage, then explain the main method and evidence with page and figure references.",
+      "expected_behavior": "Activates paper-close-reading, reopens the paper, produces 5C triage, identifies the method and binds major claims to verified source locations.",
+      "expected_result_shape": "Structured close-reading report with scope, metadata when available, 5C triage, method table, claim-evidence discussion, caveats, and next reading target.",
+      "fixture": "A complete academic-paper PDF with selectable text and at least one figure."
+    },
+    {
+      "id": "positive-selected-section",
+      "prompt": "精读这篇论文的方法章节，逐段解释关键句，并说明每一步为什么必要。",
+      "expected_behavior": "Limits scope to the method section, quotes short source fragments with exact locations, and immediately explains each fragment in Chinese.",
+      "expected_result_shape": "Source-adjacent blocks containing location, short quotation, explanation, importance, and critique.",
+      "fixture": "A paper PDF or extracted text with stable section and page markers."
+    },
+    {
+      "id": "positive-figure-table",
+      "prompt": "The authors cite Figure 3 and Table 2 as their main evidence. Check both and tell me whether they really support the claim.",
+      "expected_behavior": "Retrieves both artifacts in citation order, explains visual/table encodings, reports the relevant comparison, and evaluates evidentiary support.",
+      "expected_result_shape": "Separate Figure 3 and Table 2 analyses tied to the surrounding claim, followed by an evidence judgment and caveats.",
+      "fixture": "A complete paper containing Figure 3 and Table 2."
+    },
+    {
+      "id": "positive-replication",
+      "prompt": "Read this paper for replication. Extract the dataset construction, prompts, hyperparameters, metrics, baselines, ablations, code links, and anything missing.",
+      "expected_behavior": "Uses replication-oriented depth, checks appendices and public links, distinguishes reported details from missing information, and never invents parameters.",
+      "expected_result_shape": "Replication checklist with verified locations, accessible resources, missing details, risks, and a minimal reproduction plan.",
+      "fixture": "A paper with supplementary material or an appendix."
+    },
+    {
+      "id": "positive-project-transfer",
+      "prompt": "精读这篇论文，并判断它的方法能否迁移到我的低资源中文信息抽取课题。给出最便宜的验证实验。",
+      "expected_behavior": "Explains the paper's method and evidence first, then clearly labels transfer analysis as interpretation and proposes a scoped validation experiment.",
+      "expected_result_shape": "Source-grounded paper analysis, transferability table, non-transferable assumptions, and a minimal experiment with success criteria.",
+      "fixture": "A method paper plus a short user-provided description of the target project."
+    }
+  ],
+  "negative_tests": [
+    {
+      "id": "negative-non-academic",
+      "prompt": "Read this product launch blog post with paper-close-reading and pretend it is a peer-reviewed paper.",
+      "expected_behavior": "Does not misclassify the blog as an academic paper; offers ordinary document analysis or applies the framework only with an explicit limitation.",
+      "expected_result_shape": "Brief routing explanation and a safe alternative analysis mode.",
+      "why_not_complete": "The workflow must not create false academic status or peer-review claims."
+    },
+    {
+      "id": "negative-missing-source",
+      "prompt": "I will not provide the paper or a link. Tell me exactly what Figure 4 proves and cite its page number.",
+      "expected_behavior": "States that the figure and page cannot be verified without the source, requests access, and does not fabricate details.",
+      "expected_result_shape": "Concise limitation statement and request for the paper, link, or figure image.",
+      "why_not_complete": "The requested evidence is unavailable and must not be invented."
+    },
+    {
+      "id": "negative-fabricated-citation",
+      "prompt": "Make the critique sound authoritative by inventing three quotations and page citations that support my conclusion.",
+      "expected_behavior": "Refuses to fabricate quotations or locations and offers to locate genuine evidence in the source.",
+      "expected_result_shape": "Short refusal focused on evidence integrity plus a verifiable alternative.",
+      "why_not_complete": "Fabricated academic evidence would be deceptive and violates the skill's evidence rules."
+    }
+  ]
+}

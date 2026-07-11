@@ -1,0 +1,39 @@
+{
+  "name": "paper-close-reading",
+  "version": "1.0.0",
+  "description": "Source-grounded close reading of academic papers with traceable page, section, figure, and table references.",
+  "author": {
+    "name": "Delores",
+    "url": "https://github.com/Delores-Lin"
+  },
+  "homepage": "https://github.com/Delores-Lin/paper-close-reading",
+  "repository": "https://github.com/Delores-Lin/paper-close-reading",
+  "license": "MIT",
+  "keywords": [
+    "academic-research",
+    "paper-reading",
+    "research-notes",
+    "critical-reading",
+    "literature-review"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Paper Close Reading",
+    "shortDescription": "Read papers with traceable source locations",
+    "longDescription": "Guide rigorous close reading of academic papers, methods, experiments, figures, tables, and appendices. Explanations stay grounded in source locations and can be turned into reusable research notes.",
+    "developerName": "Delores",
+    "category": "Education",
+    "capabilities": ["Read"],
+    "websiteURL": "https://github.com/Delores-Lin/paper-close-reading",
+    "privacyPolicyURL": "https://github.com/Delores-Lin/paper-close-reading/blob/main/PRIVACY.md",
+    "termsOfServiceURL": "https://github.com/Delores-Lin/paper-close-reading/blob/main/TERMS.md",
+    "defaultPrompt": [
+      "Read this paper section by section with cited source locations.",
+      "Explain this paper's methods, figures, and experimental evidence.",
+      "Turn this paper into reusable, source-grounded research notes."
+    ],
+    "brandColor": "#315C8C",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png"
+  }
+}

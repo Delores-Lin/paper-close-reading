@@ -1,168 +1,97 @@
 ---
 name: paper-close-reading
-description: Guide rigorous close reading of academic papers, technical reports, PDFs, paper sections, figures, tables, or appendices. Use when the user asks to 精读/read closely a paper, continue to the next section, explain selected paper text, build a reading order, summarize with source locations, critique experiments, or turn paper reading into reusable research notes with citations, methods, metrics, limitations, and transfer to the user's research question.
+description: Guide rigorous, source-grounded close reading of academic papers, technical reports, PDFs, selected sections, figures, tables, equations, or appendices. Use when the user asks to 精读/read closely a paper, explain selected text, continue section by section, critique methods or experiments, locate support for a claim, assess reproducibility, or create reusable research notes. Do not use for ordinary news, blog posts, or generic document summaries unless the user explicitly wants the academic-paper workflow.
 ---
 
 # Paper Close Reading
 
-## Overview
+Read papers as evidence-bearing arguments rather than summary material. Reopen the relevant source before answering, bind important statements to precise source locations, distinguish author claims from inference, and connect the paper to the user's research goal.
 
-Use this skill to read papers with source-grounded interpretation and reusable research outputs. Do not give generic summaries. Rebuild context from the relevant paper pages before explaining, cite section/page/table/figure locations, quote only short source fragments, immediately explain each fragment in Chinese by default, distinguish paper claims from inference or critique, and connect the paper to the user's research question.
+## Scope first
 
-## Core Workflow
+Identify the requested depth and scope:
 
-1. Identify the requested scope: whole-paper triage, current section, next section, selected text, method, result table, figure, appendix, related work, or whole-paper synthesis.
-2. For a newly introduced paper, look up current external metadata before close reading: citation count when reliably available, publication venue/status, official paper page, arXiv/preprint page, version date, and visible code/data/project links. Prefer Google Scholar for citation count when accessible; otherwise use Semantic Scholar, OpenReview, DBLP, Crossref, publisher/conference pages, or arXiv and state the lookup source/date. If no reliable citation count is accessible, say so rather than guessing.
-3. Re-read the relevant source before answering. For PDFs, extract or reopen the target pages; do not rely only on memory from earlier turns.
-4. Locate evidence precisely: section title, page number, table/figure number, appendix subsection, or paragraph context.
-5. Explain in source-adjacent blocks: show a short original fragment, then immediately explain that fragment in Chinese before moving to the next fragment.
-6. When the text cites a figure, table, equation, or appendix as evidence, pause at that point, retrieve that artifact, and explain it in the context of the sentence or claim that invoked it. If one sentence or paragraph cites multiple artifacts, locate and address every cited artifact before continuing; do not cover only the most convenient one. Do not move all figure/table reading into a detached section unless the user explicitly asks for a standalone figure/table review.
-7. Separate what the paper explicitly says from what can be inferred; label critiques and task transfers as your interpretation.
-8. End with what to read next and why.
+- fast triage of the whole paper;
+- standard close reading of the main argument, method, and evidence;
+- replication-oriented reading including appendices, prompts, data, metrics, hyperparameters, and code;
+- one section, paragraph, figure, table, equation, or appendix;
+- whole-paper synthesis or reusable notes.
 
-## Reading Depth
+If the user's goal is unclear but reading can begin safely, start with fast triage and state the assumed goal. Ask only for information that cannot be recovered from the paper or public sources.
 
-Choose the reading depth explicitly when useful:
+## Core workflow
 
-- **Fast triage**: Read title, abstract, introduction, figure/table captions, conclusion, and reference signals. Use for weakly related papers, surveys, or deciding whether to continue.
-- **Standard close reading**: Read introduction, method, main experiments, core figures/tables, limitations, and conclusion. Use for most related work.
-- **Replication-oriented reading**: Also inspect appendix, prompts, data construction, metrics, hyperparameters, code/data links, and evaluation scripts. Use for papers whose method or benchmark may shape the user's own experiments.
+1. Obtain or reopen the actual paper content. Do not rely on an abstract when the question concerns methods, figures, numbers, limitations, or wording.
+2. For a newly introduced paper, verify current metadata when useful: official page, venue/status, version date, visible code/data links, and a reliably sourced citation count if available. Never guess current metadata.
+3. Locate evidence precisely using section title, printed or PDF page, figure/table/equation number, appendix subsection, or paragraph context.
+4. Explain in source-adjacent blocks: give the location, quote only the shortest useful fragment, then immediately explain it in Chinese by default unless the user requests another language.
+5. When text invokes a figure, table, equation, or appendix, inspect that artifact before moving on. Address every cited artifact needed for the claim.
+6. Separate four layers explicitly when relevant: what the paper states, what the evidence shows, what can be inferred, and your critique.
+7. End with the next best reading target and why.
 
-## First-Pass 5C Triage
+## First-pass triage
 
-For a first pass over a paper, answer:
+Use the 5C frame:
 
-- **Category**: method, benchmark, dataset, survey, analysis, theory, position, or application paper.
-- **Context**: what prior work or research gap it responds to.
-- **Correctness**: whether the assumptions and evaluation design appear plausible.
-- **Contributions**: the paper's claimed contributions, not your embellished version.
-- **Clarity**: whether terms, setup, and evidence are clear enough to trust or reuse.
+- Category: method, benchmark, dataset, survey, analysis, theory, position, or application.
+- Context: the prior work or gap the paper responds to.
+- Correctness: whether assumptions and evaluation design appear plausible.
+- Contributions: the authors' claimed contributions without embellishment.
+- Clarity: whether definitions, setup, and evidence are sufficiently clear.
 
-Also produce a one-sentence positioning note:
+Also provide:
 
 ```text
 这篇论文解决的问题是：...
 它对当前研究最可能有用的地方是：...
 ```
 
-## Source-Adjacent Explanation Pattern
+## Method and experiment reading
 
-For section-level close reading, use this structure:
+Before judging a result, extract:
 
-- **外部元信息**: report venue/status, citation count if reliably available, official/arXiv page, version date, code/data links when visible, and lookup date/source.
-- **位置**: name the section and page, plus table/figure/appendix if relevant.
-- Then read in repeated blocks:
-  - `原文（Section/Page/Figure/Table）`: quote the complete sentence whenever feasible, with the exact location in the label. If the sentence is too long or contains unrelated clauses, quote the shortest complete clause or sentence that preserves the claim.
-  - `解释`: explain that exact sentence or clause in Chinese, including terms, method, claim, implication, and whether it is explicit or inferred.
-- **为什么重要**: connect the section to the paper's argument, method, experiment, or evaluation design.
-- **批判性阅读**: identify assumptions, metric caveats, baseline issues, limitations, missing controls, or overclaiming.
-- **迁移到用户课题**: state how the idea can or cannot transfer to the user's concrete research question.
-- **下一步**: suggest the next section, table, figure, appendix, or paper to inspect.
-
-For selected text explanations, keep it tighter: give the location if known, quote the shortest relevant fragment, paraphrase/translate it, define terms in context, and explain why the authors wrote it there.
-
-## Concept Tracking
-
-Build a lightweight terminology map while reading. Track each important term's definition, first location, and whether another paper uses it differently. Prioritize terms that define the task, label space, evidence standard, measurement target, uncertainty or confidence notion, failure mode, distribution shift, ground truth, baseline, and evaluation metric.
-
-Use a table when it helps:
-
-| 术语 | 论文定义 | 位置 | 可迁移性 |
-|---|---|---|---|
-
-## Method And Experiment Decomposition
-
-For method, benchmark, and experiment sections, extract the setup before judging the conclusion:
-
-- Task formulation: what problem is being measured or optimized.
-- Input and output: what the model receives and produces.
-- Ground truth: who or what decides correctness.
-- Data: training, validation, test, distribution shifts, and filtering.
-- Model or algorithm: the minimal operational description, not every implementation detail unless needed.
-- Baselines and controls: what comparisons make the claim meaningful.
-- Metrics: exact definitions and what they do or do not measure.
-- Evidence: which figure/table/result supports each claim.
-
-Prefer a compact table:
-
-| Item | Content |
+| Item | What to identify |
 |---|---|
-| Task |  |
-| Input |  |
-| Output |  |
-| Ground truth |  |
-| Metric |  |
-| Baseline/control |  |
-| Main claim |  |
-| Evidence |  |
+| Task | What is measured or optimized |
+| Input/output | What the system receives and produces |
+| Ground truth | Who or what decides correctness |
+| Data | Splits, filtering, distribution, and leakage risks |
+| Method | Minimal operational description |
+| Baselines | Comparisons and controls |
+| Metrics | Exact definition and blind spots |
+| Main claim | The conclusion being advanced |
+| Evidence | Supporting figure, table, result, or proof |
 
-## Figure And Table Reading
+Load `references/critical-reading.md` for detailed validity, reproducibility, and transfer checks.
 
-Read figures and tables as part of the paper's argument, not as isolated illustrations. When a paragraph says "as shown in Figure X" or a contribution cites a table, first explain the paragraph's claim, then inspect the figure/table to test how that evidence supports the claim. If the paragraph cites multiple figures/tables/appendices, handle them in citation order and state which part of the claim each one supports.
+## Figures, tables, and equations
 
-For important figures or tables, explain:
+Treat artifacts as part of the argument, not decoration. For each important artifact explain:
 
-1. Figure/table number and page.
-2. The exact sentence, claim, or contribution in the surrounding text that invokes it.
-3. What the rows, columns, axes, colors, or curves represent.
-4. What comparison is being made.
-5. Which metric changes, by how much when visible, and whether the pattern is stable.
-6. What conclusion the authors draw.
-7. Whether the figure/table actually supports that conclusion, and what caveat remains.
+1. its number and page;
+2. the surrounding claim that invokes it;
+3. rows, columns, axes, colors, curves, variables, or assumptions;
+4. the comparison being made;
+5. visible metric changes and stability;
+6. the authors' conclusion;
+7. whether the artifact supports that conclusion and remaining caveats.
 
-Do not say only "performance improves"; specify dataset, metric, baseline, direction, and caveat.
+Load `references/artifact-reading.md` when figures, tables, equations, or appendices are central.
 
-## Critical Reading Checklist
+## Output and evidence rules
 
-Ask these questions before accepting a claim:
+- Never invent quotations, page numbers, citations, metrics, code links, or metadata.
+- If access is partial, say exactly which sections or pages were available and limit conclusions accordingly.
+- If extraction is noisy, label locations as approximate and prefer page images or a cleaner source.
+- Keep quotations short and interleave each quotation with its explanation.
+- State whether a conclusion is explicit, implied, or your interpretation.
+- Do not claim a result is current merely because it appeared in the paper; separate paper-era findings from current evidence.
+- Do not degrade a close-reading request into an abstract summary.
 
-- Are the assumptions realistic for the target use case?
-- Does the dataset cover the claimed phenomenon?
-- Does the metric actually measure the claimed capability?
-- Are baselines fair and strong enough?
-- Are there missing controls, ablations, confidence intervals, or negative results?
-- Could results come from leakage, prompt format, annotation artifacts, spurious correlations, or language priors?
-- Is the conclusion explicit in the evidence, implied, or speculative?
-- What cannot be transferred to the user's problem?
+For reusable notes, load `references/note-template.md` and fill only fields supported by the available evidence.
 
-For the user's current research question, dynamically add domain-specific checks. Derive them from the user's target capability, task boundary, data distribution, failure modes, confounders, reliability requirements, and evaluation metrics. Do not hard-code checks for one domain unless the user explicitly asks for that domain.
+## Negative routing
 
-Use this generic pattern:
-
-- Does the paper actually measure the capability the user cares about?
-- Does it distinguish major failure causes instead of collapsing them into one error rate?
-- Does it allow uncertainty, abstention, boundary cases, or non-applicability when relevant?
-- Does it cover the target deployment or research distribution?
-- Does it report the reliability, generalization, cost, or risk metrics needed for the user's goal?
-
-## Output Artifacts
-
-When the user is building research notes, end each paper or major section with a compact note containing:
-
-- 一句话定位
-- 研究问题
-- 核心术语
-- 方法拆解
-- 关键图表
-- 主要结论
-- 局限和反例
-- 对用户课题的启发
-- 可写进 related work 的句子
-- 可复用实验设计
-- 下一步阅读建议
-
-For a group of papers, organize reading order by dependency rather than chronology: problem definition, benchmark/dataset, method/metric, analysis/critique, then latest extensions.
-
-## Evidence Rules
-
-- Never present remembered detail as newly verified. If wording, page, or figure location matters, re-open or re-extract the source.
-- When the user asks "where is this in the paper?" or challenges a claim, verify against the source and state whether it is explicit, implied, or your explanation.
-- If PDF extraction is noisy, use page/section context and say when the citation is approximate.
-- Prefer quoting a complete sentence with an exact location label, while keeping quotes short and relevant. Do not reproduce long paper passages.
-- Do not separate all quotes into one section and all explanations into another; interleave quote and explanation.
-- Citation counts, venue status, version dates, and code/data availability are current external facts. Browse for them when starting a new paper or when asked; do not rely on memory.
-- If the paper is old and the user asks whether a result is still current, separate paper-era conclusions from current-day claims.
-
-## Tone And Granularity
-
-Be precise, patient, and source-grounded. Prefer compact explanations that teach the user how to read the paper's logic. Avoid generic praise, unsupported claims, and vague summaries such as "the method works well" without evidence.
+- For a non-academic article, do not force this workflow; use ordinary document analysis unless the user explicitly requests the same framework.
+- For an inaccessible or missing paper, do not simulate reading it. Request the source or explain what can be assessed from available metadata alone.
+- For requests to fabricate support, refuse the fabrication and offer a verifiable alternative.
