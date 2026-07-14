@@ -5,22 +5,22 @@ Fill only fields supported by the source. Include section/page/figure/table loca
 ```markdown
 # <Paper title>
 
-## 一句话定位
+## One-sentence positioning
 
-## 外部元信息
+## External metadata
 - Venue/status:
 - Version date:
 - Official/preprint page:
 - Code/data/project links:
 - Metadata lookup date and source:
 
-## 研究问题与背景
+## Research question and background
 
-## 作者声称的贡献
+## Claimed contributions
 
-## 核心术语
+## Core terminology
 
-## 方法拆解
+## Method decomposition
 - Task:
 - Input/output:
 - Ground truth:
@@ -33,17 +33,19 @@ Fill only fields supported by the source. Include section/page/figure/table loca
 | Claim | Evidence location | What the evidence shows | Caveat |
 |---|---|---|---|
 
-## 关键图表与公式
+## Key figures, tables, and equations
 
-## 主要结论
+## Main conclusions
 
-## 局限、反例与复现风险
+## Limitations, counterexamples, and reproducibility risks
 
-## 对当前课题的启发
+## Implications for the current research
 
-## 可复用实验设计
+## Reusable experiment designs
 
 ## Related-work positioning sentence
 
-## 下一步阅读建议
+## Recommended next reading
 ```
+
+Render these headings in the user's language.

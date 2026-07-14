@@ -34,5 +34,5 @@ Use only the checks relevant to the paper and the user's goal.
 
 For important terminology, record:
 
-| 术语 | 论文定义 | 位置 | 与其他文献的差异 | 可迁移性 |
+| Term | Paper definition | Location | Difference from other literature | Transferability |
 |---|---|---|---|---|

@@ -1,4 +1,4 @@
 interface:
   display_name: "Paper Close Reading"
-  short_description: "Read papers with traceable source locations"
-  default_prompt: "Use $paper-close-reading to guide me through this paper section by section with cited locations."
+  short_description: "Guided or autonomous three-pass paper reading"
+  default_prompt: "Use $paper-close-reading for this paper; if I have not selected Guided or Autonomous mode, ask me to choose before starting."
