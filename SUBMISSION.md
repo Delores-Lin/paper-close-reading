@@ -33,7 +33,7 @@ Suggested long description:
 - [ ] Push `PRIVACY.md`, `TERMS.md`, and `SUPPORT.md` so all listing URLs are public.
 - [ ] Upload the final plugin ZIP without repository metadata or local caches.
 - [ ] Enter the three starter prompts from `.codex-plugin/plugin.json`.
-- [ ] Enter exactly five positive and three negative tests from `evals/submission-tests.json`.
+- [ ] Prepare positive and negative evaluation scenarios for the submission form; local evaluation materials are not distributed in this repository.
 - [ ] Select only countries or regions where the publisher is ready to provide the listing and support.
 - [ ] Confirm policy attestations after reviewing the final package.
 - [ ] Submit for review.
@@ -41,4 +41,4 @@ Suggested long description:
 
 ## Suggested release notes
 
-> Initial public submission of Paper Close Reading 1.0.0, a skills-only plugin for source-grounded academic paper reading. The package includes whole-paper triage, section-level explanation, figure and table analysis, replication checks, reusable note templates, and explicit safeguards against fabricated evidence.
+> Paper Close Reading v1.5 (package version 1.5.0) adds structured Google Scholar lookup and citation counts, on-request PDF downloads with validation, richer paper maps with main authors and institutions, and sandbox/proxy guidance. Guided and autonomous source-grounded reading now have bilingual documentation and real reading demos.

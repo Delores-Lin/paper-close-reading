@@ -1,9 +1,22 @@
 ---
 name: paper-close-reading
-description: Guide rigorous, source-grounded close reading of academic papers, technical reports, PDFs, sections, figures, tables, and appendices through either guided interactive reading or autonomous full-paper analysis. Use when the user asks to read a paper closely, continue to the next section, explain selected text, follow a three-pass reading process, inspect cited visual evidence, critique experiments, resume a multi-turn reading, or produce reusable research notes with precise source locations, methods, metrics, limitations, and task transfer.
+description: Look up paper metadata and citation counts with the bounded Google Scholar helper or host-provided browser when requested, and explore citing papers only on request. Guide rigorous, source-grounded close reading of academic papers, technical reports, PDFs, sections, figures, tables, and appendices through either guided interactive reading or autonomous full-paper analysis. Use when the user asks to read a paper closely, continue to the next section, explain selected text, follow a three-pass reading process, inspect cited visual evidence, critique experiments, resume a multi-turn reading, or produce reusable research notes with precise source locations, methods, metrics, limitations, and task transfer.
 ---
 
 # Paper Close Reading
+
+## Google Scholar Citation Workflows
+
+- For citation counts (引用量), a requested metadata refresh, or initial paper metadata, read [references/google-scholar-citations.md](references/google-scholar-citations.md).
+- For the default fast lookup, use [scripts/scholar_lookup.py](scripts/scholar_lookup.py) with its explicit Python 3 standard-library prerequisite. It performs one local Node capability preflight per launcher process, uses Node native `fetch` when available and proxy-compatible, and tries curl only when Node is unavailable, unsupported, or cannot use the configured proxy. A new CLI invocation repeats the local preflight; it never performs a network probe. Do not rotate transports after a 403, 429, CAPTCHA, or other explicit access restriction.
+- For the structured paper-query path and citation fields, read [references/google-scholar-json.md](references/google-scholar-json.md); use its bounded browser fallback and do not assume structured citing-list support.
+- For citing papers (被引), year filters, recent additions (最新被引), or impact ranking, read [references/google-scholar-citing.md](references/google-scholar-citing.md).
+- For an explicitly requested full-text download after a candidate has been matched, use [scripts/scholar_download.py](scripts/scholar_download.py) with the selected candidate's `full_text.url`. A valid PDF file and paper identity/version verification are separate states; never select the first candidate or claim identity from the PDF magic bytes alone.
+- Both workflows load [references/google-scholar-browser.md](references/google-scholar-browser.md) only when browser interaction is needed. It owns shared timeouts, recovery, and English/Simplified Chinese locators.
+- A citation-only request does not require reading-mode selection or start the three passes. Preserve reading progress and reuse verified metadata with its source and time; write a persistent cache only when the helper's cache path is explicitly requested. Do not block paper reading on unavailable counts. Match the user's language; English internal instructions do not require English answers.
+- For Scholar terminal access in a known network-restricted sandbox, use host-authorized sandbox-external execution; after success, reuse that permitted path. For connection failures or suspicious 404 responses, check existing proxy configuration as described in [sandbox and proxy requirements](references/google-scholar-json.md#sandbox-and-proxy-requirements).
+
+
 
 ## Overview
 
@@ -13,12 +26,14 @@ Read papers through a source-grounded three-pass process and produce reusable re
 
 1. Identify the requested scope: one-off explanation, whole-paper triage, sustained close reading, current or next section, individual paragraph, method, experiment, visual artifact, appendix, related work, or whole-paper synthesis.
 2. For sustained reading, use the interaction mode explicitly selected in the current conversation. If the user has not selected one, ask whether to use Guided or Autonomous mode and stop before beginning Pass 1. Do not choose a default. Keep one-off explanations in the conversation without requiring mode selection or creating files.
-3. For a newly introduced paper, look up external metadata once: venue/status, official or arXiv page, version date, reliable citation count when available, and visible code/data/project links. Record the source and lookup date in the conversation and include it in final notes when notes are requested; do not repeat it in every section.
+3. For a newly introduced paper, look up external metadata once: title and reading version, main authors, the principal institutions listed on the current PDF first page or official paper page, venue/status, version date, reliable citation count when available, and visible code/data/project links. Record each source and lookup date in the conversation and include them in final notes when notes are requested; do not repeat them in every section. Scholar display metadata may be truncated and cannot establish institutions; do not infer current employers or author contributions.
 4. After the interaction mode is known, apply the mandatory three-pass workflow at the selected effort level. A triage-only request may stop after Pass 1; a selected-text request may use the local source-adjacent pattern without processing the whole paper.
 5. Re-read or re-extract the relevant source pages before every close-reading answer. Never rely only on earlier-turn memory when wording, location, or evidence matters.
 6. Locate evidence precisely and explain it in source-adjacent blocks. When text cites figures, tables, equations, or appendices, resolve every cited artifact in citation order before continuing.
 7. Separate explicit paper claims from inference, critique, and transfer. Label each clearly.
 8. In Guided mode, end each unit by stating the exact next section or artifact and why it comes next. In Autonomous mode, complete the requested outputs before reporting completion.
+
+When first introducing a paper, show a compact metadata card with the title and reading version, main authors, principal institutions as listed on the paper or official page, publication status/year, citation count with source and acquisition time, and verified paper/code/project links. Keep Scholar candidate metadata separate from identity verification; do not infer institutions, author roles, or current employers from truncated search text.
 
 ## Interaction Mode
 
@@ -39,7 +54,7 @@ Do not ask when the user requests only a selected passage, term, figure, table, 
 
 - Complete Pass 1, present the paper map to the user, and stop. Do not enter Pass 2 automatically.
 - Before Pass 2, establish whether the user wants unit-level or paragraph-level reading. Ask if the user has not already made the desired granularity clear. Retain that choice for the current conversation, but let the user change it explicitly at any time.
-- In unit-level reading, handle at most one section or one coherent natural unit per user turn.
+- In unit-level reading, complete one heading-bounded section per user turn, using the boundaries below. Do not silently substitute one paragraph per turn.
 - In paragraph-level reading, handle exactly one source paragraph per user turn. Do not merge adjacent paragraphs merely because they discuss the same topic.
 - Interpret any brief continuation request, such as "next," "continue," or "next section," as authorization for exactly one next unit, not the rest of the paper.
 - Resolve and display every figure, table, equation, and appendix cited by the current unit before stopping, but do not use those references as permission to enter the next unit.
@@ -54,8 +69,17 @@ Do not ask when the user requests only a selected passage, term, figure, table, 
 
 Offer these two Pass 2 granularities in the user's language:
 
-- **Unit-level**: Read one section or coherent argumentative unit per turn. Use this for efficient coverage while preserving source-grounded explanation.
+- **Unit-level**: Read one complete heading-bounded section per turn (for example, 3.1.2, or 3.1 when it has no subsections). Explain its connected argument and evidence without stopping after each paragraph.
 - **Paragraph-level**: Read exactly one source paragraph per turn. Use this when the user wants the original text and evidence examined line by line.
+
+#### Unit-Level Boundaries
+
+- Use the paper's actual heading hierarchy, not PDF font size or the heading depth of generated Markdown. The numbering examples are authoritative: use a complete 3.1.2 subsection when present; otherwise use the complete 3.1 subsection. Do not split below 3.1.2 (for example into 3.1.2.1), individual paragraphs, claims, or contribution bullets unless the user explicitly requests finer reading.
+- For unnumbered papers, use equivalent structural headings. An abstract or introduction without internal section headings is one complete unit; paragraph breaks, bold lead-ins, and lists alone do not create units.
+- When a parent section has introductory text before its child headings, include that text with the first child unit. Cover each sibling unit in source order unless an alternative reading order is established; do not omit parent introductions or previously unread remainder text.
+- Announce the heading and source span at the start. Cover all substantive arguments and relevant evidence within that boundary before pausing. Group related source quotations and explanations into a connected account rather than mechanically explaining each paragraph separately or replacing close reading with a generic summary.
+- Keep cited figures and tables with the claims they support. Their retrieval does not change the main reading boundary. A long section is not permission to stop at an arbitrary paragraph; compress repetition while preserving the argument. If a genuine delivery limit requires splitting, state it and establish the split with the user.
+- After a mid-session granularity correction, retain completed reading and cover the unread portion of the appropriate heading-bounded unit. Do not restart completed sections or continue the previous paragraph-sized rhythm.
 
 For paragraph-level reading, use this sequence:
 
@@ -89,6 +113,8 @@ Read the title, abstract, introduction, conclusion, section structure, figure/ta
 
 Do not treat caption scanning as evidence sufficient to accept experimental claims.
 
+The default map is built from the paper itself. Do not traverse the full reference list or citing list automatically. Only when the user asks for background, a method source, a baseline, later work, current progress, or a similar literature question, use the optional prior-work or citing-paper workflows in the Scholar references. Mark every externally discovered relationship as a candidate until the cited paper and its relation to the current argument are verified.
+
 ### Pass 2: Close-Read the Evidence
 
 Read the paper section by section. For each claim:
@@ -108,7 +134,7 @@ After the intended main text and appendices are covered:
 - Build a claim-evidence map and test whether each major conclusion is supported.
 - Evaluate assumptions, datasets, metrics, baselines, controls, ablations, uncertainty, generalization, and reproducibility.
 - Separate robust findings from suggestive evidence and speculation.
-- Compare terminology and claims with relevant prior or later work when needed.
+- Compare terminology and claims with relevant prior or later work only when the user requests related-work, background, current-progress, or follow-up analysis; otherwise keep the synthesis grounded in the current paper and its source evidence.
 - Deliver the final critique and synthesis. Include task transfer, related-work language, experiment ideas, and open questions when relevant.
 
 Do not declare a sustained whole-paper reading complete until Pass 3 has been delivered. In Guided mode, final notes are optional and require confirmation; in Autonomous mode, finish the requested notes before reporting completion.

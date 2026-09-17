@@ -8,6 +8,8 @@ Fill only fields supported by the source. Include section/page/figure/table loca
 ## One-sentence positioning
 
 ## External metadata
+- Main authors:
+- Principal institutions (as listed on the paper/official page):
 - Venue/status:
 - Version date:
 - Official/preprint page:

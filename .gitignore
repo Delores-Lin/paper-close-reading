@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+
+# Keep this skill's development tests local.
+/skills/paper-close-reading/tests/
+
+# Local working materials; published assets are kept separately.
+/notes/
+/assets/concepts/
+/scholar-fetch-probe.mjs
+/tools/
+.DS_Store
+/docs/
+/evals/

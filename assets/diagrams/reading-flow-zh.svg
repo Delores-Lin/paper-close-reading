@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="590" viewBox="0 0 1200 590" role="img" aria-labelledby="title desc">
+<title id="title">从一篇论文，到有证据支撑的理解</title><desc id="desc">提供 PDF 或论文链接. 选择引导式或自主式. 建立论文地图 → 精读原文与证据 → 批判性评价与综合</desc>
+<rect width="1200" height="590" rx="20" fill="#F5F2EA"/>
+<style>text{font-family:Arial,"Noto Sans CJK SC","PingFang SC",sans-serif;fill:#282724}.muted{fill:#625F59}.accent{fill:#A84435}</style>
+<text x="42" y="57" font-size="28" font-weight="600" class="">从一篇论文，到有证据支撑的理解</text>
+<text x="42" y="103" font-size="19" font-weight="400" class="">提供 PDF 或论文链接</text>
+<path d="M370 97h65m-8-7 8 7-8 7" stroke="#A84435" stroke-width="2" fill="none"/>
+<text x="462" y="103" font-size="19" font-weight="600" class="">选择引导式或自主式</text>
+<rect x="42" y="140" width="352" height="180" rx="12" fill="#FFFDFA" stroke="#DAD4C9"/>
+<text x="64" y="175" font-size="17" font-weight="600" class="accent">01</text>
+<text x="64" y="214" font-size="25" font-weight="600" class="">建立论文地图</text>
+<text x="64" y="254" font-size="18" font-weight="400" class="muted">研究问题、贡献与核心术语</text>
+<text x="64" y="284" font-size="18" font-weight="400" class="muted">关键图表与阅读顺序</text>
+<path d="M400 230h18m-6-6 6 6-6 6" fill="none" stroke="#A84435" stroke-width="2"/>
+<rect x="424" y="140" width="352" height="180" rx="12" fill="#FFFDFA" stroke="#DAD4C9"/>
+<text x="446" y="175" font-size="17" font-weight="600" class="accent">02</text>
+<text x="446" y="214" font-size="25" font-weight="600" class="">精读原文与证据</text>
+<text x="446" y="254" font-size="18" font-weight="400" class="muted">原文与解释相邻呈现</text>
+<text x="446" y="284" font-size="18" font-weight="400" class="muted">结合图表、公式和实验核对</text>
+<path d="M782 230h18m-6-6 6 6-6 6" fill="none" stroke="#A84435" stroke-width="2"/>
+<rect x="806" y="140" width="352" height="180" rx="12" fill="#FFFDFA" stroke="#DAD4C9"/>
+<text x="828" y="175" font-size="17" font-weight="600" class="accent">03</text>
+<text x="828" y="214" font-size="25" font-weight="600" class="">批判性评价与综合</text>
+<text x="828" y="254" font-size="18" font-weight="400" class="muted">检验主张与证据的对应关系</text>
+<text x="828" y="284" font-size="18" font-weight="400" class="muted">局限、迁移价值与开放问题</text>
+<path d="M42 350h1116" stroke="#DAD4C9"/>
+<text x="42" y="391" font-size="15" font-weight="600" class="accent">引导式</text>
+<text x="220" y="391" font-size="19" font-weight="400" class="">地图后暂停；每读完一节或一段，等待你继续。</text>
+<text x="42" y="433" font-size="15" font-weight="600" class="accent">自主式</text>
+<text x="220" y="433" font-size="19" font-weight="400" class="">连续完成约定范围，交付自包含的阅读笔记。</text>
+<text x="42" y="492" font-size="17" font-weight="400" class="muted">引导式笔记按需保存；单段原文或图表问题可以独立解答。</text>
+<text x="42" y="546" font-size="18" font-weight="400" class="muted">按需扩展：背景文献 · 后续被引研究 · PDF 下载</text>
+</svg>

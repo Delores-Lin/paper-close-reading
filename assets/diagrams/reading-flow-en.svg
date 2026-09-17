@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="590" viewBox="0 0 1200 590" role="img" aria-labelledby="title desc">
+<title id="title">From a paper to an evidence-backed understanding</title><desc id="desc">Bring a PDF or paper link. Choose Guided or Autonomous. Map the paper → Read the evidence → Critique &amp; synthesize</desc>
+<rect width="1200" height="590" rx="20" fill="#F5F2EA"/>
+<style>text{font-family:Arial,"Noto Sans CJK SC","PingFang SC",sans-serif;fill:#282724}.muted{fill:#625F59}.accent{fill:#A84435}</style>
+<text x="42" y="57" font-size="28" font-weight="600" class="">From a paper to an evidence-backed understanding</text>
+<text x="42" y="103" font-size="19" font-weight="400" class="">Bring a PDF or paper link</text>
+<path d="M370 97h65m-8-7 8 7-8 7" stroke="#A84435" stroke-width="2" fill="none"/>
+<text x="462" y="103" font-size="19" font-weight="600" class="">Choose Guided or Autonomous</text>
+<rect x="42" y="140" width="352" height="180" rx="12" fill="#FFFDFA" stroke="#DAD4C9"/>
+<text x="64" y="175" font-size="17" font-weight="600" class="accent">01</text>
+<text x="64" y="214" font-size="25" font-weight="600" class="">Map the paper</text>
+<text x="64" y="254" font-size="18" font-weight="400" class="muted">Question, contributions, terminology</text>
+<text x="64" y="284" font-size="18" font-weight="400" class="muted">Key figures and a reading route</text>
+<path d="M400 230h18m-6-6 6 6-6 6" fill="none" stroke="#A84435" stroke-width="2"/>
+<rect x="424" y="140" width="352" height="180" rx="12" fill="#FFFDFA" stroke="#DAD4C9"/>
+<text x="446" y="175" font-size="17" font-weight="600" class="accent">02</text>
+<text x="446" y="214" font-size="25" font-weight="600" class="">Read the evidence</text>
+<text x="446" y="254" font-size="18" font-weight="400" class="muted">Source passages with explanations</text>
+<text x="446" y="284" font-size="18" font-weight="400" class="muted">Figures, equations and experiments</text>
+<path d="M782 230h18m-6-6 6 6-6 6" fill="none" stroke="#A84435" stroke-width="2"/>
+<rect x="806" y="140" width="352" height="180" rx="12" fill="#FFFDFA" stroke="#DAD4C9"/>
+<text x="828" y="175" font-size="17" font-weight="600" class="accent">03</text>
+<text x="828" y="214" font-size="25" font-weight="600" class="">Critique &amp; synthesize</text>
+<text x="828" y="254" font-size="18" font-weight="400" class="muted">Claims checked against evidence</text>
+<text x="828" y="284" font-size="18" font-weight="400" class="muted">Limitations, transfer and open questions</text>
+<path d="M42 350h1116" stroke="#DAD4C9"/>
+<text x="42" y="391" font-size="15" font-weight="600" class="accent">GUIDED</text>
+<text x="220" y="391" font-size="19" font-weight="400" class="">Pause after the map and each section or paragraph.</text>
+<text x="42" y="433" font-size="15" font-weight="600" class="accent">AUTONOMOUS</text>
+<text x="220" y="433" font-size="19" font-weight="400" class="">Complete the agreed scope and deliver self-contained notes.</text>
+<text x="42" y="492" font-size="17" font-weight="400" class="muted">Guided notes are optional. One-off passage or figure questions can stand alone.</text>
+<text x="42" y="546" font-size="18" font-weight="400" class="muted">On request: background literature · citing papers · PDF downloads</text>
+</svg>

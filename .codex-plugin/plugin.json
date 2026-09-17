@@ -1,6 +1,6 @@
 {
   "name": "paper-close-reading",
-  "version": "1.0.0",
+  "version": "1.5.0",
   "description": "Source-grounded close reading of academic papers with traceable page, section, figure, and table references.",
   "author": {
     "name": "Delores",
@@ -32,8 +32,8 @@
       "Explain this paper's methods, figures, and experimental evidence.",
       "Turn this paper into reusable, source-grounded research notes."
     ],
-    "brandColor": "#315C8C",
-    "composerIcon": "./assets/icon.png",
-    "logo": "./assets/logo.png"
+    "brandColor": "#A84435",
+    "composerIcon": "./assets/branding/paper-close-reading-mark.png",
+    "logo": "./assets/branding/paper-close-reading-mark.png"
   }
 }
