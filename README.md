@@ -10,7 +10,7 @@ Read academic papers with an agent that keeps the original text, its explanation
 
 Bring a paper. Choose how you want to read. Ask questions as you go.
 
-> **New in v1.5 · Paper discovery and close-reading improvements**
+> **New in v1.5🎉 · Paper discovery and close-reading improvements**
 >
 > - Structured Google Scholar paper lookup and citation counts.
 > - On-request PDF downloads with file validation and separate identity/version checks.
